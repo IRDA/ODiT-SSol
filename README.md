@@ -2,7 +2,7 @@
 
 ## La classification
 
-Analyse
+
 La stratégie adoptée avant la classification des indices de santé, basée sur les diverses covariables citées (NDVI, NDWI, SSM, TPI et TWI), est d’effectuer une **analyse par régression multiple par forêt aléatoire** des 5 covariables restantes avec le NDVI.
 
 Cette approche nous permet de voir l’importance des covariables et d’en choisir les plus pertinentes.
