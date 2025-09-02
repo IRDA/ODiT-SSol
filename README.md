@@ -68,6 +68,7 @@ Des études antérieures dans le bassin versant de la rivière aux Brochets (Syl
 - Les indicateurs NDWI, SSM, TPI et TWI ont été évalués via la régression multiple par forêt aléatoire. NDWI s’est révélé le meilleur prédicteur du NDVI.
 
 ---
+![Indices de santé des sols](C:\Users\mohamed.niang\OneDrive - IRDA\Documents\GitHub\ODiT-SSol\img_JPG)
 
 ## Conclusion
 
