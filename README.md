@@ -32,7 +32,7 @@ Des études antérieures dans le bassin versant de la rivière aux Brochets (Syl
 ## Figure 1 : Performance des covariables
 
 ![Indicateurs de performance des covariables NDWI, SSM, TPI et TWI](images/performance_covariables.png)  
-*Indicateurs de performance des covariables NDWI, SSM, TPI et TWI issus de l'analyse de régression multiple par forêt aléatoire utilisant le NDVI comme variable dépendante.*
+*Figure 1 : Indicateurs de performance des covariables NDWI, SSM, TPI et TWI issus de l'analyse de régression multiple par forêt aléatoire utilisant le NDVI comme variable dépendante.*
 
 ---
 
@@ -58,7 +58,7 @@ Des études antérieures dans le bassin versant de la rivière aux Brochets (Syl
 | Classe 6        | Zones nécessitant restauration pédologique | 3 500 |
 | Classe 7        | Zones de référence avec conditions idéales | 3 681 |
 
-*Répartition par unité de surface des sept classes finales d'indices de santé des sols.*
+*Tableau 1 : Répartition par unité de surface des sept classes finales d'indices de santé des sols.*
 
 ---
 
