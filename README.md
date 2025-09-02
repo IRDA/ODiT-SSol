@@ -50,13 +50,13 @@ Des études antérieures dans le bassin versant de la rivière aux Brochets (Syl
 
 | Classe ODiT-SSol | Description | Superficie (ha) |
 |-----------------|------------|----------------|
-| Classe 1        | Développement persistant et déficient des cultures | 5 230 |
-| Classe 2        | Zones de productivité intermédiaire | 12 450 |
-| Classe 3        | Zones associées à la productivité la plus élevée | 7 890 |
-| Classe 4        | Zones de drainage modéré et développement acceptable | 9 120 |
-| Classe 5        | Zones de productivité élevée et drainage optimal | 8 000 |
-| Classe 6        | Zones nécessitant restauration pédologique | 3 500 |
-| Classe 7        | Zones de référence avec conditions idéales | 3 681 |
+| Classe 1        | Productivité faible, humide, position Basse | 5 230 |
+| Classe 2        | Productivité faible, humide, position Moyenne à Haute | 12 450 |
+| Classe 3        | Productivité faible, sec, position Haute | 7 890 |
+| Classe 4        | Productivité faible, humide, position Basse à moyenne  | 9 120 |
+| Classe 5        | Productivité faible, humidité moyenne, toutes positions | 8 000 |
+| Classe 6        | Productivité moyenne | 3 500 |
+| Classe 7        | Productivité élevée| 3 681 |
 
 *Tableau 1 : Répartition par unité de surface des sept classes finales d'indices de santé des sols.*
 
