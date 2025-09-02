@@ -1,3 +1,56 @@
+# Classes des Indices de santé des sols ODiT-SSol
+
+## Introduction
+La détermination des indices de santé des sols repose simultanément sur :
+- les gradients d'humidité du sol,  
+- le degré de développement des cultures,  
+- l'état du drainage de surface.  
+
+Conceptuellement, la détection des zones de sol présentant un état physique déficient reposait sur l'hypothèse selon laquelle **l'humidité persistante du sol au fil des ans** (indices d'humidité issus de données optiques ou radar) est **corrélée à des indices de végétation relativement faibles**.  
+
+Cette hypothèse reflète le principe généralement admis selon lequel **l'excès d'humidité ou le mauvais drainage** constitue le facteur limitant le plus important du développement et du rendement des cultures dans le sud du Québec.  
+
+Des projets historiques (Sylvain et al., 2012; Michaud et al., 2009a; 2009b; Michaud et al., 2003) ont confirmé une telle cohérence spatiale entre :  
+- les indices topographiques,  
+- l'humidité du sol et les propriétés stables du sol,  
+- les indices multispectraux d'humidité et de végétation.  
+
+---
+
+## Méthodologie
+
+### Sélection des variables
+La première étape a consisté à **sélectionner les variables les plus pertinentes**.  
+Une approche d'apprentissage automatique (**Random Forest Recursive Feature Elimination – RFRFE**, Hijmans, 2019) a été utilisée.  
+- **Variable dépendante :** NDVI (développement des cultures)  
+- **Covariables exploratoires :** NDWI, SSM, TPI, TWI  
+
+Deux métriques de performance :
+- **%Inc. MSE** : augmentation de l'erreur quadratique moyenne des prédictions lors de la permutation des covariables,  
+- **Inc. Node Purity** : mesure de la qualité de séparation des nœuds.  
+
+### Résultats
+- **NDWI** (imagerie multispectrale) > **SSM** (humidité radar) → NDWI retenu.  
+- **TPI** et **TWI** comparables → TPI retenu pour sa meilleure représentativité spatiale.  
+
+👉 **Conclusion intermédiaire :** l’imagerie multispectrale est un meilleur indicateur de l’effet de l’humidité sur le développement du couvert végétal que l’imagerie radar.
+
+---
+
+## Classification OBIA
+- Les valeurs des indices annuels standardisés (NDVI, NDWI, TPI) ont été regroupées selon trois classes de percentiles :  
+  - **< 30 %** : faible (déficience persistante)  
+  - **30–70 %** : intermédiaire  
+  - **> 70 %** : forte (productivité élevée)  
+
+- Superposition des classes → **27 combinaisons initiales**  
+- Réduction par regroupement → **7 classes OBIA finales** (indices de santé des sols)  
+
+📊 **Tableau 3 :** Classification des indices de santé des sols selon la superposition NDVI – NDWI – TPI.  
+📈 **Figure 13 :** Indicateurs de performance des covariables issus de la régression multiple par Random Forest.  
+
+---
+
 ## Tableau 3 : Classification des indices de santé des sols
 
 | No. Classe | Classification                         | Indice de développement des cultures | Indice d’humidité | Indice de position topographique | Superficie (ha) | Distribution (%) |
@@ -19,3 +72,24 @@
 > 1. Les classes sont définies suivant les intervalles de percentiles inférieur ou égal à 30 %, de 30 à 70 % et supérieur à 70 %.  
 > 2. Le pourcentage est exprimé par rapport à l’ensemble de la superficie analysée, comportant des cultures de maïs ou de soya durant les années 2017 à 2023 inclusivement.  
 
+---
+
+## Résultats globaux
+- **Superficie totale caractérisée :** 49 871 ha  
+- **Cultures analysées :** maïs et soja (2017–2023)  
+
+---
+
+## Conclusion
+Ce projet a mené au développement d’un **SIG convivial (ODiT-SSol)** dédié au diagnostic de l’état physique des sols dans le bassin versant de la baie Missisquoi (Québec).  
+
+### Atouts de l’outil :
+- Identification des zones d’humidité excessive et de compactage du sol,  
+- Mise en relation avec le développement et le rendement des cultures,  
+- Support à la planification de pratiques de conservation et de drainage,  
+- Validation par comparaison avec des données de rendement en maïs.  
+
+### Bénéfices attendus :
+- Amélioration de la productivité agricole,  
+- Réduction du ruissellement, des sédiments et nutriments,  
+- **Situation gagnant-gagnant : santé des sols + qualité de l’eau de la baie Missisquoi.**
