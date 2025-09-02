@@ -1,43 +1,21 @@
-# Rapport : Classification des Indices de Santé des Sols
+## Tableau 3 : Classification des indices de santé des sols
 
-## La classification
-
-
-La stratégie adoptée avant la classification des indices de santé, basée sur les diverses covariables citées (NDVI, NDWI, SSM, TPI et TWI), est d’effectuer une **analyse par régression multiple par forêt aléatoire** des 5 covariables restantes avec le NDVI.
-
-Cette approche nous permet de voir l’importance des covariables et d’en choisir les plus pertinentes.
-
-Deux métriques pour les mesures de performance ont été utilisées :
-
-1. **%IncMSE** : indique l'augmentation de l'erreur quadratique moyenne des prédictions résultant de la permutation des covariables.
-2. **IncNodePurity** : lié à la fonction de perte qui détermine les meilleures répartitions. Plus ce nombre est élevé, plus la variable est utile.
-
-### Interprétation des métriques
-
-- Pour le **%IncMSE** : plus le nombre est élevé, plus la variable est importante.
-- Pour le **IncNodePurity** : des variables plus utiles permettent d'obtenir des augmentations plus importantes de la pureté des nœuds.
-
-### Résultats
-
-- **NDWI** présente la valeur la plus élevée pour les deux métriques.
-- **TPI** et **TWI** ont des valeurs proches.
-- **SSM** présente la valeur la plus faible.
-
-### Conclusion
-
-Ce constat permet de considérer **NDWI**, **TPI** et **NDVI** comme les covariables les plus pertinentes dans le développement du modèle de classification des indices de la santé des sols.
-
-## Approche orientée objet
-
-Un autre aspect de cette classification est qu’elle est **orientée objet**. Au lieu d’effectuer la classification sur les intensités des pixels, elle est basée sur les **percentiles** des **médianes** :
-
-- `< 30 %`
-- `30 – 70 %`
-- `> 70 %`
-
-Des règles de décisions sont ensuite établies en fonction de ces classes.
+| No. Classe | Classification                         | Indice de développement des cultures | Indice d’humidité | Indice de position topographique | Superficie (ha) | Distribution (%) |
+|------------|----------------------------------------|--------------------------------------|-------------------|----------------------------------|-----------------|------------------|
+| **Indices faibles** |||||||
+| 1 | Faible, humide, position basse | NDVI-2 (Faible) | NDWI-4 (Humide) | TPI-2 Basse, Accumulation | 2 820 | 5,65 |
+| 2 | Faible, humide, position moyenne à haute | NDVI-2 (Faible) | NDWI-4 (Humide) | TPI 3-4 Haute/Moyenne | 8 646 | 17,34 |
+| 3 | Faible, sec, position haute | NDVI-2 (Faible) | NDWI-2 (Sec) | TPI-4 Haute, Élévation | 68 | 0,14 |
+| 4 | Faible, sec, position basse à moyenne | NDVI-2 (Faible) | NDWI-2 (Sec) | TPI 2-3 | 180 | 0,36 |
+| 5 | Faible, humidité moyenne | NDVI-2 (Faible) | NDWI-3 (Moyen) | TPI 2-3-4 | 2 415 | 4,84 |
+| **Indices moyens** |||||||
+| 6 | Moyen | NDVI-3 (Moyen) | Tous NDWI 2-3-4 | Tous TPI 2-3-4 | 19 810 | 39,72 |
+| **Indices élevés** |||||||
+| 7 | Élevé | NDVI-4 (Élevé) | Tous NDWI 2-3-4 | Tous TPI 2-3-4 | 15 933 | 31,95 |
 
 ---
-![graph](img/graph.png)
-![table](img/table.png)
-![indice](img/indice.jpg)
+
+> **Notes**  
+> 1. Les classes sont définies suivant les intervalles de percentiles inférieur ou égal à 30 %, de 30 à 70 % et supérieur à 70 %.  
+> 2. Le pourcentage est exprimé par rapport à l’ensemble de la superficie analysée, comportant des cultures de maïs ou de soya durant les années 2017 à 2023 inclusivement.  
+
