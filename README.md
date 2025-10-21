@@ -1,43 +1,91 @@
-# Rapport : Classification des Indices de Santé des Sols
+# ODiT-SSol : Indices de santé des sols
 
-## La classification
+## Contexte
 
+La détermination des indices de santé des sols repose sur l'analyse simultanée des gradients d'humidité du sol, du développement des cultures et du drainage de surface. La détection des zones de sol déficientes repose sur l'hypothèse que l'humidité persistante du sol est corrélée à des indices de végétation relativement faibles. Cette approche est particulièrement pertinente dans le sud du Québec, où l'excès d'humidité ou le mauvais drainage limite le développement et le rendement des cultures.  
 
-La stratégie adoptée avant la classification des indices de santé, basée sur les diverses covariables citées (NDVI, NDWI, SSM, TPI et TWI), est d’effectuer une **analyse par régression multiple par forêt aléatoire** des 5 covariables restantes avec le NDVI.
-
-Cette approche nous permet de voir l’importance des covariables et d’en choisir les plus pertinentes.
-
-Deux métriques pour les mesures de performance ont été utilisées :
-
-1. **%IncMSE** : indique l'augmentation de l'erreur quadratique moyenne des prédictions résultant de la permutation des covariables.
-2. **IncNodePurity** : lié à la fonction de perte qui détermine les meilleures répartitions. Plus ce nombre est élevé, plus la variable est utile.
-
-### Interprétation des métriques
-
-- Pour le **%IncMSE** : plus le nombre est élevé, plus la variable est importante.
-- Pour le **IncNodePurity** : des variables plus utiles permettent d'obtenir des augmentations plus importantes de la pureté des nœuds.
-
-### Résultats
-
-- **NDWI** présente la valeur la plus élevée pour les deux métriques.
-- **TPI** et **TWI** ont des valeurs proches.
-- **SSM** présente la valeur la plus faible.
-
-### Conclusion
-
-Ce constat permet de considérer **NDWI**, **TPI** et **NDVI** comme les covariables les plus pertinentes dans le développement du modèle de classification des indices de la santé des sols.
-
-## Approche orientée objet
-
-Un autre aspect de cette classification est qu’elle est **orientée objet**. Au lieu d’effectuer la classification sur les intensités des pixels, elle est basée sur les **percentiles** des **médianes** :
-
-- `< 30 %`
-- `30 – 70 %`
-- `> 70 %`
-
-Des règles de décisions sont ensuite établies en fonction de ces classes.
+Des études antérieures dans le bassin versant de la rivière aux Brochets (Sylvain et al., 2012; Michaud et al., 2003, 2009a, 2009b) ont montré la cohérence spatiale entre indices topographiques, humidité du sol et indices multispectraux de végétation.
 
 ---
-![graph](img/graph.png)
-![table](img/table.png)
-![indice](img/indice.jpg)
+
+## Méthodologie
+
+### Sélection des variables pertinentes
+
+- Analyse spatio-temporelle des indices d'humidité, du développement des cultures, de la topographie et des propriétés du sol.
+- Utilisation de la **méthode RFRFE (Random Forest Recursive Feature Elimination)** pour identifier les variables les plus explicatives du NDVI.
+- Variables exploratoires :  
+  - **NDWI** : indice d'humidité multispectrale  
+  - **SSM** : humidité du sol radar  
+  - **TPI** : Topographic Position Index  
+  - **TWI** : Topographic Wetness Index
+
+### Critères de performance des covariables
+
+- **%Inc. MSE** : augmentation de l'erreur quadratique moyenne due à la permutation des covariables  
+- **Inc. Node Purity** : pureté des nœuds dans l'arbre de décision  
+
+> Résultat : NDWI sélectionné comme indicateur principal d'humidité, TPI retenu pour le drainage de surface.
+
+---
+
+## Figure 1 : Performance des covariables
+
+![Indicateurs de performance des covariables NDWI, SSM, TPI et TWI](https://github.com/IRDA/ODiT-SSol/blob/main/img_JPG/Indicateurs%20de%20performance%20NDVI%20vs%20(NDWI%2C%20SSM%2C%20TPI%20et%20TWI)%20%20par%20for%C3%AAt%20al%C3%A9atoire%20(RFRFE).jpg)
+*Figure 1 : Indicateurs de performance des covariables NDWI, SSM, TPI et TWI issus de l'analyse de régression multiple par forêt aléatoire utilisant le NDVI comme variable dépendante.*
+
+---
+
+## Classification OBIA
+
+- Classification sur les percentiles des indices standardisés (<30%, 30–70%, >70%) plutôt que sur les pixels bruts.
+- NDVI : développement des cultures  
+- NDWI : humidité du sol  
+- TPI : drainage de surface
+- Superposition des trois indices : 27 classes initiales réduites à 7 classes finales d’indices de santé des sols.
+
+---
+
+## Tableau 1 : Répartition des classes finales
+
+| Classe ODiT-SSol | Description | Superficie (ha) |
+|-----------------|------------|----------------|
+| Classe 1        | Productivité faible, humide, position Basse | 5 230 |
+| Classe 2        | Productivité faible, humide, position Moyenne à Haute | 12 450 |
+| Classe 3        | Productivité faible, sec, position Haute | 7 890 |
+| Classe 4        | Productivité faible, humide, position Basse à moyenne  | 9 120 |
+| Classe 5        | Productivité faible, humidité moyenne, toutes positions | 8 000 |
+| Classe 6        | Productivité moyenne | 3 500 |
+| Classe 7        | Productivité élevée| 3 681 |
+
+*Tableau 1 : Répartition par unité de surface des sept classes finales d'indices de santé des sols.*
+
+---
+
+## Résultats
+
+- Surface totale caractérisée : **49 871 ha** de maïs/soja (2017-2023)
+- Les indicateurs NDWI, SSM, TPI et TWI ont été évalués via la régression multiple par forêt aléatoire. NDWI s’est révélé le meilleur prédicteur du NDVI.
+
+---
+![Indices de santé des sols][[(https://github.com/IRDA/ODiT-SSol/blob/main/img_JPG/Indicateurs%20de%20performance%20NDVI%20vs%20(NDWI%2C%20SSM%2C%20TPI%20et%20TWI)%20%20par%20for%C3%AAt%20al%C3%A9atoire%20(RFRFE).jpg)](https://github.com/IRDA/ODiT-SSol/blob/main/img_JPG/Classification%20des%20indices%20de%20sant%C3%A9%20des%20sols%20selon%20la%20superposition%20des%20indices%20.jpg)](https://github.com/IRDA/ODiT-SSol/blob/main/img_JPG/Indices_Sante_Sols.jpg)
+## Conclusion
+
+Le projet ODiT-SSol a permis de développer un **SIG convivial** pour le diagnostic de l’état physique des sols dans le bassin versant de la baie Missisquoi, Québec :  
+
+- Identification des zones d’humidité excessive et de compactage du sol.
+- Relation entre conditions pédologiques et rendement des cultures.
+- Support à la planification de pratiques agricoles durables et à l’amélioration de la qualité de l’eau.
+
+Le livrable final est un **outil SIG opérationnel** pour le personnel agricole et les gestionnaires d’exploitation.
+
+---
+
+## Références
+
+- Sylvain, J-D, A.R. Michaud, M.C. Nolin et G.B. Bénié. 2012. *A novel spectro-temporal approach for predicting soil physical properties*. Digital Soil Assessments and Beyond. Minasy, Malone et McBratney (eds). Taylor and Francis Group, London, ISBN 978-0-415-62155-7, pp. 381-386.  
+- Michaud, A.R., Landry, I., Desmarais, C., Savoie, C. 2003. *Structures et relations spatiales entre les images aériennes multi-spectrales, les propriétés du sol et les rendements de grandes cultures dans la région des Bois-Francs*. Journal canadien de télédétection, Vol. 29(1), 66–74. [Lien](https://irda.qc.ca/fr/publications/?p=5&r=1781)  
+- Michaud, A., Deslandes, J., Gagné, G., Grenon, L., Vézina, K. 2009a. *Gestion raisonnée et intégrée des sols et de l'eau (GRISE)*. 87 p. [Lien PDF](https://irda.qc.ca/media/1lidhxmg/irda-gestionsolseaugrise-rapport-avril2008.pdf)  
+- Michaud, A., Ruyet, F., Beaudin, I. 2009b. *Évaluation des outils de gestion agroenvironnementale à l'échelle du bassin versant dans un cadre opérationnel de service-conseil à la ferme – Projet Lisière verte*. 63 p.  
+- Rajasheker, R., Pullanagari, E., Kereszturi, G., Yule, I. 2018. *Integrating Airborne Hyperspectral, Topographic, and Soil Data for Estimating Pasture Quality Using Recursive Feature Elimination with Random Forest Regression*. Remote Sens. 10, 1117. [Lien MDPI](https://www.mdpi.com/journal/remotesensing)  
+- Hijmans, R.J. 2019. *Statistical modeling*. In: Hijmans, R.J., Chamberlin, J. *Regional Agronomy: a practical handbook*. CIMMYT. [Lien](https://reagro.org/tools/statistical/)
