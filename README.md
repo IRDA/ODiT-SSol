@@ -31,7 +31,7 @@ Des études antérieures dans le bassin versant de la rivière aux Brochets (Syl
 
 ## Figure 1 : Performance des covariables
 
-![Indicateurs de performance des covariables NDWI, SSM, TPI et TWI](images/performance_covariables.png)  
+![Indicateurs de performance des covariables NDWI, SSM, TPI et TWI](https://github.com/IRDA/ODiT-SSol/blob/main/img_JPG/Indicateurs%20de%20performance%20NDVI%20vs%20(NDWI%2C%20SSM%2C%20TPI%20et%20TWI)%20%20par%20for%C3%AAt%20al%C3%A9atoire%20(RFRFE).jpg)
 *Figure 1 : Indicateurs de performance des covariables NDWI, SSM, TPI et TWI issus de l'analyse de régression multiple par forêt aléatoire utilisant le NDVI comme variable dépendante.*
 
 ---
