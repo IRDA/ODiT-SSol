@@ -68,8 +68,7 @@ Des études antérieures dans le bassin versant de la rivière aux Brochets (Syl
 - Les indicateurs NDWI, SSM, TPI et TWI ont été évalués via la régression multiple par forêt aléatoire. NDWI s’est révélé le meilleur prédicteur du NDVI.
 
 ---
-![Indices de santé des sols](C:\Users\mohamed.niang\OneDrive - IRDA\Documents\GitHub\ODiT-SSol\img_JPG\Indices_Sante_Sols.jpg)
-
+![Indices de santé des sols](https://github.com/IRDA/ODiT-SSol/blob/main/img_JPG/Indicateurs%20de%20performance%20NDVI%20vs%20(NDWI%2C%20SSM%2C%20TPI%20et%20TWI)%20%20par%20for%C3%AAt%20al%C3%A9atoire%20(RFRFE).jpg)
 ## Conclusion
 
 Le projet ODiT-SSol a permis de développer un **SIG convivial** pour le diagnostic de l’état physique des sols dans le bassin versant de la baie Missisquoi, Québec :  
